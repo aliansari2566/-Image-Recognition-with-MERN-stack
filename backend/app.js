@@ -2,7 +2,7 @@ const express = require('express');
 const connectDB = require('./config/database');
 const authRoutes = require('./routes/authRoutes');
 const imageRoutes = require('./routes/imageRoutes');
-const { errorHandler } = require('./middlewares/errorMiddleware');
+// const { errorHandler } = require('./middlewares/errorMiddleware'); // Commented out
 const dotenv = require('dotenv');
 const cors = require('cors');
 
@@ -17,6 +17,6 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/images', imageRoutes);
 
-app.use(errorHandler);
+// app.use(errorHandler); // Commented out
 
 module.exports = app;

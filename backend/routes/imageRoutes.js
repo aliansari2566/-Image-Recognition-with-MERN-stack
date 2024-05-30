@@ -12,25 +12,27 @@
 
 
 
-// const express = require('express');
-// const router = express.Router();
-// const { uploadImage, getImages, getImageById } = require('../controllers/imageController');
-
-// router.post('/upload', uploadImage); // Remove protect middleware
-
-// router.get('/', getImages);
-// router.get('/:id', getImageById);
-
-// module.exports = router;
-
 const express = require('express');
+// const upload = require('../middlewares/uploadMiddleware');
 const router = express.Router();
-const upload = require('../middlewares/upload'); // Import the multer middleware
+
 const { uploadImage, getImages, getImageById } = require('../controllers/imageController');
 
-router.post('/upload', upload.single('image'), uploadImage); // Use multer middleware for file upload
+router.post('/upload', uploadImage); // Remove protect middleware
 
 router.get('/', getImages);
 router.get('/:id', getImageById);
 
 module.exports = router;
+
+// const express = require('express');
+// const router = express.Router();
+// const upload = require('../middlewares/upload'); // Import the multer middleware
+// const { uploadImage, getImages, getImageById } = require('../controllers/imageController');
+
+// router.post('/upload', upload.single('image'), uploadImage); // Use multer middleware for file upload
+
+// router.get('/', getImages);
+// router.get('/:id', getImageById);
+
+// module.exports = router;

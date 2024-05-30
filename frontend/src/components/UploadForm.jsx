@@ -19,7 +19,7 @@ const UploadForm = () => {
 
     try {
       const token = localStorage.getItem('token'); // Get token from local storage
-      const response = await uploadImage(formData, token); // Pass token to uploadImage function
+      const response = await uploadImage(formData); // Pass token to uploadImage function
       console.log('Upload successful:', response.data);
       // Handle success: display a message or update UI
     } catch (error) {

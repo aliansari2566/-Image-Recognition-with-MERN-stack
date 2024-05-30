@@ -9,10 +9,10 @@ const api = axios.create({
 const uploadImage = async (formData, token) => {
   try {
     const response = await api.post('/images/upload', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        Authorization: `Bearer ${token}`,
-      },
+    //   headers: {
+    //     'Content-Type': 'multipart/form-data',
+    //     Authorization: `Bearer ${token}`,
+    //   },
     });
     return response.data;
   } catch (error) {

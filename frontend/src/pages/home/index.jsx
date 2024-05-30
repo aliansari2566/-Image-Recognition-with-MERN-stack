@@ -1,32 +1,27 @@
-// src/App.js
 import React, { useState } from 'react';
 import UploadForm from '../../components/UploadForm';
-import ImageRecognition from '../../components/ImageRecognition';
-import * as tf from '@tensorflow/tfjs';
-import * as mobilenet from '@tensorflow-models/mobilenet';
+import ImageDisplay from '../../components/ImageDisplay';
+import { uploadImage } from '../../services/api'; // Import the named export
 
 const Home = () => {
-  const [image, setImage] = useState(null);
-  const [predictions, setPredictions] = useState([]);
+  const [imageUrl, setImageUrl] = useState('');
 
-  const handleImageUpload = async (file) => {
-    // Load the MobileNet model
-    const model = await mobilenet.load();
-    setImage(URL.createObjectURL(file));
-
-    // Make predictions
-    const imageElement = document.createElement('img');
-    imageElement.src = URL.createObjectURL(file);
-
-    const predictions = await model.classify(imageElement);
-    setPredictions(predictions);
+  const handleImageUpload = async (formData) => {
+    try {
+      const response = await uploadImage(formData); // Call the named export directly
+      setImageUrl(response.data.imageUrl);
+      // Handle success: display a message or update UI
+    } catch (error) {
+      console.error('Upload failed:', error.response.data);
+      // Handle error: display an error message or handle differently
+    }
   };
 
   return (
     <div>
-      <h1>Image Recognition App</h1>
+      <h1>Image Upload and Recognition</h1>
       <UploadForm onImageUpload={handleImageUpload} />
-      {image && <ImageRecognition imageUrl={image} predictions={predictions} />}
+      {imageUrl && <ImageDisplay imageUrl={imageUrl} />}
     </div>
   );
 };
